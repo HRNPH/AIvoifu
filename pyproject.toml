@@ -5,6 +5,7 @@ description = "Easy and fast AI Waifu voice generation"
 authors = ["HRNPH <hrnph@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
+packages = [{include = "src"}]
 
 [tool.poetry.dependencies]
 python = "3.10.x"
