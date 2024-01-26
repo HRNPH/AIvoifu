@@ -1,9 +1,18 @@
 # AIwaifu Vocal Pipeline
-an implementation of AIwaifu Vocal Pipeline
-to made it easier to create a fast and easy to use Cute Waifu Voice
-
-## Pipeline
+an implementation of AIwaifu Vocal Pipeline to make it easier to create a fast and easy-to-use Cute Waifu Voice
 Text -> TTS -> Voice Conversion -> Done
+
+## Usage
+```bash
+# pip install aivoifu
+poetry install aivoifu # Recommended using poetry
+```
+```python
+from AIvoifu import client_pipeline
+
+model = client_pipeline.tts_pipeline(tts_model_selection='gtts', vc_model_selection='ayaka-jp', hubert_model='zomehwh-hubert-base', language='en')
+model.tts('Hello This Is A Test Text Anyway', save_path='./test.wav')
+```
 
 ## How to add your own TTS/Voice Conversion pipeline
 First of all we need to understand how AIwaifu Vocal Pipeline was design
