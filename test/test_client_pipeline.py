@@ -1,4 +1,3 @@
-# test/test_client_pipeline.py
 from src.AIvoifu import client_pipeline
 import os
 
