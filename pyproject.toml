@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "aivoifu"
-version = "0.1.0"
+version = "0.1.1"
 description = "Easy and fast AI Waifu voice generation"
 authors = ["HRNPH <hrnph@protonmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "src"}]
+packages = [{include = "AIvoifu"}]
 
 [tool.poetry.dependencies]
 python = "3.10.x"

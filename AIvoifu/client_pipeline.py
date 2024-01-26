@@ -1,6 +1,6 @@
 # ----------- Waifu Vocal Pipeline -----------------------
-from src.AIvoifu.tts import tts
-from src.AIvoifu.voice_conversion import vc_inference as vc
+from AIvoifu.tts import tts
+from AIvoifu.voice_conversion import vc_inference as vc
 
 class tts_pipeline:
     def __init__(self,

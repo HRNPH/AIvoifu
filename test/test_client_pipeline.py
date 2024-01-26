@@ -1,4 +1,4 @@
-from src.AIvoifu import client_pipeline
+from AIvoifu import client_pipeline
 import os
 
 def test_tts_generate():
