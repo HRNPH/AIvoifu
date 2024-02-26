@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "xiao-genshin-rvc",
+    "ORIGIN": "https://huggingface.co/spaces/ardha27/rvc-models/tree/main/weights/xiao-jp",
+    "AUTHOR": "ardha27",
+    "LICENSE": "MIT",
+    "CHECKPOINT_LINK": "https://huggingface.co/spaces/ardha27/rvc-models/resolve/main/weights/xiao-jp/xiao-jp.pth",
+    "FEATURE_RETRIEVAL_LIBRARY_LINK": "https://huggingface.co/spaces/ardha27/rvc-models/resolve/main/weights/xiao-jp/added_IVF233_Flat_nprobe_5.index",
+    "FEATURE_FILE_LINK": "https://huggingface.co/spaces/ardha27/rvc-models/resolve/main/weights/xiao-jp/total_fea.npy"
+}
