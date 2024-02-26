@@ -106,8 +106,9 @@ class vc_inference:
         return: (model_name, checkpoint_link, feature_retrieval_library_link, feature_file_link)
         """
         if not self.__is_model_available_in_zoo(model_name):
-            err_qry = ['please select a model from the list below:', self.__get_available_model_from_zoo().keys()]
-            raise ValueError(f'Model {model_name} is not available in zoo.' + '\n'.join(err_qry))
+            err_qry = ['please select a model from the list below:'] + list(self.__get_available_model_from_zoo().keys())
+            print(err_qry)
+            raise ValueError(f'Model |{model_name}| is not available in zoo ' + '\n - '.join(err_qry))
         else:
             model_meta = self.__get_available_model_from_zoo()[model_name]
             return model_meta['name'], model_meta['checkpoint_link'], model_meta['feature_retrieval_library_link'], model_meta['feature_file_link']
