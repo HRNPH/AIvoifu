@@ -63,6 +63,10 @@ class BaseTTS:
         return None
 
 class Gtts(BaseTTS):
+    """[Google Text-to-Speech(gTTs)](https://github.com/pndurette/gTTS)\n
+    is a Python library and CLI tool to interface with Google Translate's text-to-speech API.\n
+    - Allow Language Selection
+    """
     def __init__(self, language: str = None) -> None:
         from gtts import gTTS
         # disable gtts debug
@@ -94,6 +98,11 @@ class Gtts(BaseTTS):
         return None
 
 class EdgeTTS(BaseTTS):
+    """[Edge TTS](https://github.com/rany2/edge-tts)\n
+    is a TTS model that run on microsoft edge TTS services.\n
+    utilize asyncio to run the tts function under the hood.\n
+    - Allow voice (speaker) selection
+    """
     def __init__(self) -> None:
         import edge_tts
         self.model = edge_tts
