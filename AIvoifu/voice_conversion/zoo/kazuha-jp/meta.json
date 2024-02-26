@@ -1,0 +1,9 @@
+{
+    "DESCRIPTION": "kazuha-rvc",
+    "ORIGIN": "https://huggingface.co/spaces/zomehwh/sovits-models/raw/main/models/alice",
+    "AUTHOR": "ardha27",
+    "LICENSE": "MIT",
+    "CHECKPOINT_LINK": "https://huggingface.co/spaces/ardha27/rvc-models/resolve/main/weights/kazuha-jp/kazuha-jp.pth",
+    "FEATURE_RETRIEVAL_LIBRARY_LINK": "https://huggingface.co/spaces/ardha27/rvc-models/resolve/main/weights/kazuha-jp/added_IVF677_Flat_nprobe_7.index",
+    "FEATURE_FILE_LINK": "https://huggingface.co/spaces/ardha27/rvc-models/resolve/main/weights/kazuha-jp/total_fea.npy"
+}
