@@ -1,6 +1,6 @@
 {
     "DESCRIPTION": "kazuha-rvc",
-    "ORIGIN": "https://huggingface.co/spaces/zomehwh/sovits-models/raw/main/models/alice",
+    "ORIGIN": "https://huggingface.co/spaces/ardha27/rvc-models/tree/main/weights/kazuha-jp",
     "AUTHOR": "ardha27",
     "LICENSE": "MIT",
     "CHECKPOINT_LINK": "https://huggingface.co/spaces/ardha27/rvc-models/resolve/main/weights/kazuha-jp/kazuha-jp.pth",
