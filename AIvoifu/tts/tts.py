@@ -1,5 +1,4 @@
-from typing import Literal
-
+from typing import Dict, Literal
 
 # write your own tts class and place it in this folder
 # model weight will be downloaded and save at tts_base_model
@@ -94,17 +93,38 @@ class Gtts(BaseTTS):
             raise ValueError(f"Invalid language selection: {self.language} please select from" + "\n".join(self.supported_languages()))
         return None
 
-class auto_tts: # add your tts model mapping 'key' here
-    possible_model = Literal["gtts"]
-    # possible_model = Literal['khanomtal11', 'key2', 'key3', ...]
+class EdgeTTS(BaseTTS):
+    def __init__(self) -> None:
+        import edge_tts
+        self.model = edge_tts
+        self.model_name = "edge_tts"
+    
+    def tts(self, text, out_path, voice="en-US-RogerNeural"):
+        import asyncio
+        voice = self.voice if self.voice is not None else voice
+        communicate = self.model.Communicate(text, voice)
+        asyncio.run(
+            communicate.save(out_path)
+        )
+        
+    def requested_additional_args(self, **kwargs) -> None:
+        self.voice = kwargs.get('voice', None)
+        return None
+
+# add your tts model mapping 'key' here
+# possible_model = Literal['khanomtal11', 'key2', 'key3', ...]
+possible_model = Literal["gtts", "edge_tts"]
+class auto_tts:
+    possible_model = possible_model # allow auto_tts.possible_model access
     def __init__(
         self,
         model_selection: possible_model = None,
         **kwargs
     ) -> None:
-        self.model_mapping = {
+        self.model_mapping: Dict[possible_model, BaseTTS] = {
             # "khanomtal11": khanomtal11,
             "gtts": Gtts,
+            "edge_tts": EdgeTTS,
             # 'key' : your tts class
         }
 
