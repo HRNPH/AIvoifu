@@ -112,7 +112,7 @@ class EdgeTTS(BaseTTS):
         import asyncio
         voice = self.voice if self.voice is not None else voice
         communicate = self.model.Communicate(text, voice)
-        asyncio.run(
+        asyncio.get_event_loop().run_until_complete(
             communicate.save(out_path)
         )
         
