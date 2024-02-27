@@ -1,3 +1,4 @@
+import os
 from typing import Dict, Literal
 
 # write your own tts class and place it in this folder
@@ -104,21 +105,29 @@ class EdgeTTS(BaseTTS):
     - Allow voice (speaker) selection
     """
     def __init__(self) -> None:
-        import edge_tts
-        self.model = edge_tts
         self.model_name = "edge_tts"
-    
+        
+    async def __tts_async(self, text, out_path, voice="en-US-RogerNeural"):
+        import edge_tts
+        voice = self.voice if self.voice is not None else voice
+        communicate = edge_tts.Communicate(text, voice)
+        await communicate.save(out_path)
+        
+    def __run_in_thread(self, text, out_path, voice):
+        import asyncio
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        loop.run_until_complete(self.__tts_async(text, out_path, voice))
+        loop.close()
+        
     def tts(self, text, out_path, voice="en-US-RogerNeural"):
         import asyncio
+        import threading
         voice = self.voice if self.voice is not None else voice
-        communicate = self.model.Communicate(text, voice)
-        # check if there's event loop running, if not create new one
-        if not asyncio.get_event_loop().is_running(): # handle as if sync
-            print("Running on new event loop")
-            asyncio.run(communicate.save(out_path))
-        else: # will work on FastAPI and other async framework
-            print("Running on event loop")
-            asyncio.get_event_loop().create_task(communicate.save(out_path))
+        # Check if there's an event loop running that can be used
+        t = threading.Thread(target=self.__run_in_thread, args=(text, out_path, voice))
+        t.start()
+        t.join()  # Wait for the thread to complete
         
     def requested_additional_args(self, **kwargs) -> None:
         self.voice = kwargs.get('voice', None)
@@ -166,7 +175,13 @@ class auto_tts:
             self.model_mapping[model_name]().tts(text, out_path, **kwargs)
         # use default model, initialized in __init__
         self.model.tts(text, out_path, **kwargs)
+        self.__validate_file_exist(out_path)
 
+    def __validate_file_exist(self, file_path: str) -> bool:
+        if not os.path.isfile(file_path):
+            raise ValueError(f"File not found: {file_path}")
+        return True
+    
     def list_all_models(self) -> list:
         return list(self.model_mapping.keys())
     
