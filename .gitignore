@@ -8,5 +8,6 @@
 *.wav
 *.tmp
 test.py
+test_asyncio.py
 .pytest_cache
 \dist

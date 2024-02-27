@@ -114,9 +114,11 @@ class EdgeTTS(BaseTTS):
         communicate = self.model.Communicate(text, voice)
         # check if there's event loop running, if not create new one
         if not asyncio.get_event_loop().is_running(): # handle as if sync
+            print("Running on new event loop")
             asyncio.run(communicate.save(out_path))
         else: # will work on FastAPI and other async framework
-            asyncio.create_task(communicate.save(out_path))
+            print("Running on event loop")
+            asyncio.get_event_loop().create_task(communicate.save(out_path))
         
     def requested_additional_args(self, **kwargs) -> None:
         self.voice = kwargs.get('voice', None)
