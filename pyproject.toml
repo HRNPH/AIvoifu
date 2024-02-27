@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aivoifu"
-version = "0.1.3"
+version = "0.1.4"
 description = "Easy and fast AI Waifu voice generation"
 authors = ["HRNPH <hrnph@protonmail.com>"]
 license = "MIT"

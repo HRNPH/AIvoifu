@@ -112,9 +112,11 @@ class EdgeTTS(BaseTTS):
         import asyncio
         voice = self.voice if self.voice is not None else voice
         communicate = self.model.Communicate(text, voice)
-        asyncio.get_event_loop().run_until_complete(
-            communicate.save(out_path)
-        )
+        # check if there's event loop running, if not create new one
+        if not asyncio.get_event_loop().is_running(): # handle as if sync
+            asyncio.run(communicate.save(out_path))
+        else: # will work on FastAPI and other async framework
+            asyncio.create_task(communicate.save(out_path))
         
     def requested_additional_args(self, **kwargs) -> None:
         self.voice = kwargs.get('voice', None)
