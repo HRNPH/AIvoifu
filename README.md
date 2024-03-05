@@ -1,4 +1,7 @@
 # AIwaifu Vocal Pipeline
+Waifu Voice - Made Easy
+
+
 an implementation of AIwaifu Vocal Pipeline to make it easier to create a fast and easy-to-use Cute Waifu Voice
 Text -> TTS -> Voice Conversion -> Done
 
