@@ -58,8 +58,10 @@ def has_mps() -> bool:
 if not torch.cuda.is_available():
     if has_mps():
         print("没有发现支持的N卡, 使用MPS进行推理")
-        device = "cpu" # it could be "mps" but i do this to test cpu inference on mac
-        is_half = False # half precision is not supported on cpu, but it is supported on mps
+        device = "cpu"  # it could be "mps" but i do this to test cpu inference on mac
+        is_half = (
+            False  # half precision is not supported on cpu, but it is supported on mps
+        )
     else:
         print("没有发现支持的N卡, 使用CPU进行推理")
         device = "cpu"

@@ -46,7 +46,7 @@ class CustomTTS:
       wget.download(self.model_link, weigh_path)
     self.model = tts_library.load(weigh_path)
     print(f'model {self.model_name} initialized')
-  
+
   def tts(self, text:str, save:boolean=True, your_args:any):
     # some preprocessing
     output = self.model.tts(text)
