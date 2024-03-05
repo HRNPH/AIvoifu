@@ -12,7 +12,9 @@ repos:
     rev: 24.2.0
     hooks:
     -   id: black
--   repo: https://github.com/commitizen-tools/commitizen
-    rev: v3.16.0
+-   repo: https://github.com/alessandrojcm/commitlint-pre-commit-hook
+    rev: v9.13.0
     hooks:
-    -   id: commitizen
+    -   id: commitlint
+        stages: [commit-msg]
+        additional_dependencies: ['@commitlint/config-conventional']
