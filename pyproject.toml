@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "aivoifu"
-version = "0.1.6"
+version = "0.1.7"
 description = "Easy and fast AI Waifu voice generation"
 authors = ["HRNPH <hrnph@protonmail.com>"]
 license = "MIT"
@@ -22,6 +22,8 @@ setuptools = "^69.0.3"
 edge-tts = "^6.1.10"
 fastapi = "^0.110.0"
 uvicorn = "^0.27.1"
+transformers = "^4.38.2"
+soundfile = "^0.12.1"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.4"
