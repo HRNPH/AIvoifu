@@ -17,10 +17,6 @@ from .RVC.config import is_half, device
 from scipy.io.wavfile import write
 from torchaudio.functional import resample
 
-torchaudio.set_audio_backend(
-    "soundfile"
-)  # use soundfile backend, due to error with sox backend
-
 
 class vc_inference:
     def __init__(
