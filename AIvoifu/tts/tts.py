@@ -229,7 +229,9 @@ class Bark(BaseTTS):
         print(f"Using {self.device} as a running device")
         model = "suno/bark"
         self.processor = AutoProcessor.from_pretrained(model)
-        self.model = BarkModel.from_pretrained(model).to(self.device)
+        self.model = (
+            BarkModel.from_pretrained(model).to(self.device).to_bettertransformer()
+        )
 
     def tts(self, text, out_path, voice="v2/en_speaker_6"):
         print(text)
