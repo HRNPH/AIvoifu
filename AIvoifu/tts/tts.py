@@ -264,6 +264,7 @@ class XTTS(BaseTTS):
         from TTS.api import TTS
         import torch
 
+        os.environ["COQUI_TOS_AGREED"] = "1"  # agree to coqui TOS
         self.model = TTS("xtts", gpu=torch.cuda.is_available())
         self.model_name = "xtts"
         self.voice = None
