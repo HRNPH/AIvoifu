@@ -13,13 +13,21 @@ class tts_pipeline:
         **kwargs,
     ) -> None:
         print("Loading Waifu Vocal Pipeline...")
+        print(
+            f"Selected TTS Model: {tts_model_selection} | Selected VC Model: {vc_model_selection}"
+            + "\n",
+            f"Selected Hubert Model: {hubert_model} | Force Load Model: {force_load_model}"
+            + "\n",
+            f"Other Args: {kwargs}",
+        )
         self.cache_root = "./audio_cache"
         self.model = tts.auto_tts(model_selection=tts_model_selection, **kwargs)
-        self.vc_model = vc.vc_inference(
-            selected_model_from_zoo=vc_model_selection,
-            hubert_model=hubert_model,
-            force_load_model=force_load_model,
-        )
+        if vc_model_selection and hubert_model:
+            self.vc_model = vc.vc_inference(
+                selected_model_from_zoo=vc_model_selection,
+                hubert_model=hubert_model,
+                force_load_model=force_load_model,
+            )
         print("Loaded Waifu Vocal Pipeline")
 
     def tts(self, text, voice_conversion=True, save_path=None):
@@ -28,8 +36,12 @@ class tts_pipeline:
             save_path = f"{self.cache_root}/dialog_cache.wav"
         self.model.tts(text, save_path)
         # voice conversion
-        if voice_conversion:
+        if voice_conversion and self.vc_model:
             self.vc_model.convert(save_path, save_path=save_path, vc_transpose=3)
+        elif voice_conversion and not self.vc_model:
+            raise Exception(
+                "Voice Conversion Model Not Loaded, Cannot Convert Voice Please Load VC Model in the Pipeline"
+            )
         return save_path
 
 

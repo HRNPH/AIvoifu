@@ -197,6 +197,9 @@ class EdgeTTS(BaseTTS):
         loop.run_until_complete(self.__tts_async(text, out_path, voice))
         loop.close()
 
+    def supported_languages(self) -> list:
+        return ["en"]
+
     def tts(self, text, out_path, voice="en-US-RogerNeural"):
         import asyncio
         import threading
@@ -232,6 +235,9 @@ class Bark(BaseTTS):
         self.model = (
             BarkModel.from_pretrained(model).to(self.device).to_bettertransformer()
         )
+
+    def supported_languages(self) -> list:
+        return ["en"]
 
     def tts(self, text, out_path, voice="v2/en_speaker_6"):
         print(text)
@@ -269,6 +275,10 @@ class XTTS(BaseTTS):
         self.model_name = "xtts"
         self.voice = None
         self.sr = 24000
+
+    @staticmethod
+    def supported_languages(self) -> list:
+        return ["en"]
 
     def tts(self, text, out_path, voice="Ana Florence", language="en"):
         print("Perform XTTS TTS...")
