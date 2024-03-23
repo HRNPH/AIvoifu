@@ -185,7 +185,7 @@ class EdgeTTS(BaseTTS):
     async def __tts_async(self, text, out_path, voice="en-US-RogerNeural"):
         import edge_tts
 
-        voice = self.voice if self.voice is not None else voice
+        voice = self.speaker if self.speaker is not None else voice
         communicate = edge_tts.Communicate(text, voice)
         await communicate.save(out_path)
 
@@ -204,14 +204,14 @@ class EdgeTTS(BaseTTS):
         import asyncio
         import threading
 
-        voice = self.voice if self.voice is not None else voice
+        voice = self.speaker if self.speaker is not None else voice
         # Check if there's an event loop running that can be used
         t = threading.Thread(target=self.__run_in_thread, args=(text, out_path, voice))
         t.start()
         t.join()  # Wait for the thread to complete
 
     def requested_additional_args(self, **kwargs) -> None:
-        self.voice = kwargs.get("voice", None)
+        self.speaker = kwargs.get("voice", None)
         return None
 
 
@@ -242,7 +242,7 @@ class Bark(BaseTTS):
     def tts(self, text, out_path, voice="v2/en_speaker_6"):
         print(text)
         print(out_path, voice)
-        voice = self.voice if self.voice is not None else voice
+        voice = self.speaker if self.speaker is not None else voice
         # use the model to generate audio using device
         print("Perform Bark TTS...")
         print("text to model input...")
@@ -257,7 +257,7 @@ class Bark(BaseTTS):
         sf.write(out_path, audio_array, self.model.generation_config.sample_rate)
 
     def requested_additional_args(self, **kwargs) -> None:
-        self.voice = kwargs.get("voice", None)
+        self.speaker = kwargs.get("voice", None)
         return None
 
 
@@ -273,7 +273,7 @@ class XTTS(BaseTTS):
         os.environ["COQUI_TOS_AGREED"] = "1"  # agree to coqui TOS
         self.model = TTS("xtts", gpu=torch.cuda.is_available())
         self.model_name = "xtts"
-        self.voice = None
+        self.speaker = None
         self.sr = 24000
 
     @staticmethod
@@ -283,10 +283,10 @@ class XTTS(BaseTTS):
     def tts(self, text, out_path, voice="Ana Florence", language="en"):
         print("Perform XTTS TTS...")
         print("text to audio...")
-        print(voice if self.voice is None else self.voice)
+        print(voice if self.speaker is None else self.speaker)
         output = self.model.tts(
             text=text,
-            speaker=self.voice if self.voice is not None else voice,
+            speaker=self.speaker if self.speaker is not None else voice,
             language=language,
             split_sentences=True,
         )
@@ -294,7 +294,7 @@ class XTTS(BaseTTS):
         sf.write(out_path, output, self.sr)
 
     def requested_additional_args(self, **kwargs) -> None:
-        self.voice = kwargs.get("voice", None)
+        self.speaker = kwargs.get("voice", None)
         return None
 
 
