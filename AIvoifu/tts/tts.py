@@ -211,7 +211,7 @@ class EdgeTTS(BaseTTS):
         t.join()  # Wait for the thread to complete
 
     def requested_additional_args(self, **kwargs) -> None:
-        self.speaker = kwargs.get("voice", None)
+        self.speaker = kwargs.get("speaker", None)
         return None
 
 
@@ -257,7 +257,7 @@ class Bark(BaseTTS):
         sf.write(out_path, audio_array, self.model.generation_config.sample_rate)
 
     def requested_additional_args(self, **kwargs) -> None:
-        self.speaker = kwargs.get("voice", None)
+        self.speaker = kwargs.get("speaker", None)
         return None
 
 
@@ -294,7 +294,7 @@ class XTTS(BaseTTS):
         sf.write(out_path, output, self.sr)
 
     def requested_additional_args(self, **kwargs) -> None:
-        self.speaker = kwargs.get("voice", None)
+        self.speaker = kwargs.get("speaker", None)
         return None
 
 
