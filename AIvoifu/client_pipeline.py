@@ -28,6 +28,11 @@ class tts_pipeline:
                 hubert_model=hubert_model,
                 force_load_model=force_load_model,
             )
+        if vc_model_selection and not hubert_model:
+            raise ValueError("Please Provide Hubert Model To Enable Voice Conversion")
+        elif not vc_model_selection and hubert_model:
+            raise ValueError("Please Provide VC Model To Enable Voice Conversion")
+
         print("Loaded Waifu Vocal Pipeline")
 
     def tts(self, text, voice_conversion=True, save_path=None):

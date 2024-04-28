@@ -3,7 +3,7 @@ import os
 
 
 def test_tts_generate():
-    for tts_model in ["gtts", "edge_tts", "xtts"]:
+    for tts_model in ["gtts", "edge_tts"]:
         model = client_pipeline.tts.auto_tts(model_selection=tts_model, language="en")
         model.tts("Hello This Is A Test Text Anyway", out_path=f"./tts_{tts_model}.wav")
         assert os.path.exists(f"./tts_{tts_model}.wav")

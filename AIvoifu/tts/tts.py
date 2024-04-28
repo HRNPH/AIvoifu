@@ -261,46 +261,13 @@ class Bark(BaseTTS):
         return None
 
 
-class XTTS(BaseTTS):
-    """[Coqui TTS](
-    XTTS is a TTS model that run on Coqui TTS Api.\n
-    """
-
-    def __init__(self) -> None:
-        from TTS.api import TTS
-        import torch
-
-        os.environ["COQUI_TOS_AGREED"] = "1"  # agree to coqui TOS
-        self.model = TTS("xtts", gpu=torch.cuda.is_available())
-        self.model_name = "xtts"
-        self.speaker = None
-        self.sr = 24000
-
-    @staticmethod
-    def supported_languages(self) -> list:
-        return ["en"]
-
-    def tts(self, text, out_path, voice="Ana Florence", language="en"):
-        print("Perform XTTS TTS...")
-        print("text to audio...")
-        print(voice if self.speaker is None else self.speaker)
-        output = self.model.tts(
-            text=text,
-            speaker=self.speaker if self.speaker is not None else voice,
-            language=language,
-            split_sentences=True,
-        )
-        # write to file, 24kHz
-        sf.write(out_path, output, self.sr)
-
-    def requested_additional_args(self, **kwargs) -> None:
-        self.speaker = kwargs.get("speaker", None)
-        return None
-
-
 # add your tts model mapping 'key' here
 # possible_model = Literal['khanomtal11', 'key2', 'key3', ...]
-possible_model = Literal["gtts", "edge_tts", "bark", "xtts"]
+possible_model = Literal[
+    "gtts",
+    "edge_tts",
+    "bark",
+]
 
 
 class auto_tts:
@@ -312,7 +279,6 @@ class auto_tts:
             "gtts": Gtts,
             "edge_tts": EdgeTTS,
             "bark": Bark,
-            "xtts": XTTS,
             # 'key' : your tts class
         }
 
